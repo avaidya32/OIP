@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 // const express = require('express');
 // const routes = express().Router();
-import Router from 'next/router';
+import Router from "next/router";
 import styles from "./start-hackathon.module.scss";
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Form,
-} from "react-bootstrap";
-
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 
 const StartHackathon = () => {
   const [problemName, setProblemName] = useState("");
@@ -22,7 +15,7 @@ const StartHackathon = () => {
   const [statement, setStatement] = useState("");
   const [reward, setReward] = useState("");
   const [link, setLink] = useState("");
-
+  const [file, setFile] = useState();
   return (
     <div className={styles.container}>
       <Container>
@@ -34,7 +27,7 @@ const StartHackathon = () => {
             </h2>
             <div className={styles.formContainer}>
               <Form>
-              <p>Name of Organisation:</p>
+                <p>Name of Organisation:</p>
                 <Form.Group controlId="OrgName" className={styles.formGroup}>
                   <Form.Control
                     maxLength={50}
@@ -160,8 +153,30 @@ const StartHackathon = () => {
                   />
                 </Form.Group>
                 <p>Image Attachment*:</p>
+                {/* <form action='/api/upload' method="POST" encType="multipart/form-data">
+                  <input type="file" name="file" id="file"></input>
+                    <label for="file">Choose file</label>
+                  <input type="submit" value="Submit"></input>
+                </form> */}
+
+                {/* <form action = '/uploadImage' enctype ="multipart-form-data" method = "POST">
+                    <input type = "file" name="myFile" accept="image/*">
+                      
+                    </input>
+                    <input type="sumbit" value = "Upload image"></input>
+                </form> */}
+
                 <Form.Group controlId="Img" className={styles.formGroup}>
-                  <Form.File label="Image Input" custom/>
+                  <Form.File
+                    onChange={(e) => {
+                      setFile(e.target.files[0]);
+                    }}
+                    type="file"
+                    name="file"
+                    id="file"
+                    label="Image Input"
+                    custom
+                  />
                 </Form.Group>
                 <p>Other Links*:</p>
                 <Form.Group controlId="attach" className={styles.formGroup}>
@@ -195,17 +210,36 @@ const StartHackathon = () => {
                         Duration: duration,
                         Statement: statement,
                         Reward: reward,
-                        Link: link
+                        Link: link,
                       }),
                       headers: {
                         "Content-type": "application/json; charset=UTF-8",
                       },
                     })
                       .then((res) => {
-                        return res.json(res);
+                        return res.json();
                       })
                       .then((payload) => {
-                        const {name} = payload;
+                        const { name, id } = payload;
+                        // fetch("/api/upload", {
+                        //   method: "POST",
+                        //   body: JSON.stringify({
+                        //     file: file,
+                        //     id: id
+                        //   }),
+                        //   headers: {
+                        //     "Content-type": "application/json; charset=UTF-8",
+                        //   },
+                        // })
+                        //   .then((res) => {
+                        //     return res.json();
+                        //   })
+                        //   .then((response) => {
+                        //     Router.push(`/probPage?name=${name}`);
+                        //   })
+                        //   .c;tch((e) => {
+                        //     //TODO:
+                        //   })
                         Router.push(`/probPage?name=${name}`);
                       })
                       .catch((e) => {

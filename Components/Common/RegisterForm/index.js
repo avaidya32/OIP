@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./register-form.module.scss";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Dropdown, DropdownButton } from "react-bootstrap";
 import Router from "next/Router";
 
 const RegisterForm = ({ page }) => {
@@ -270,7 +270,7 @@ const RegisterForm = ({ page }) => {
           </Form.Group>
           <p>Sector of Industry:</p>
           <Form.Group controlId="OrgSec" className={styles.formGroup}>
-            <Form.Control
+            {/* <Form.Control
               maxLength={30}
               aria-label="name-edit"
               className={styles.control}
@@ -281,7 +281,38 @@ const RegisterForm = ({ page }) => {
                 event.preventDefault();
                 setSector(event.target.value);
               }}
-            />
+            /> */}
+            <DropdownButton
+              variant="cta"
+              title="Sector of Industry"
+              size="sm"
+              style={{ marginRight: "10px" }}
+            >
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={() => {
+                  setSector("Pharmaceutical");
+                }}
+              >
+                Pharmaceutical
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-2"
+                onClick={() => {
+                  setSector("Financial");
+                }}
+              >
+                Financial
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-3"
+                onClick={() => {
+                  setSector("IT");
+                }}
+              >
+                IT
+              </Dropdown.Item>
+            </DropdownButton>
           </Form.Group>
           <p>Specialization:</p>
           <Form.Group controlId="Spec" className={styles.formGroup}>
@@ -357,7 +388,7 @@ const RegisterForm = ({ page }) => {
                 })
                 .then((payload) => {
                   console.log("from register client:", payload, payload.data);
-                  Router.push(`/startupHome`);
+                  Router.push(`/browseStartup`);
                 })
                 .catch((e) => {
                   console.log(e);

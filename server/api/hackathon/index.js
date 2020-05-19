@@ -59,10 +59,14 @@ routes.post("/putinfo", async ({ body }, res) => {
     })
       .save()
       .then((data) => {
-        const {ProblemName} = data;
+        const {ProblemName, _id} = data;
         return res.status(200).json({
-          name: ProblemName
+          name: ProblemName,
+          id: _id
         })
+      })
+      .then((data) =>{
+        
       })
       .catch((e) => {
         console.log("Could not add data:", e);

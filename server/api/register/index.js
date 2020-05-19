@@ -15,7 +15,7 @@ routes.post("/vc", async ({ body }, res) => {
       EmailID: Email,
       PhNumber: Number,
       username: Username,
-      password: password,
+      password: Password,
     })
       .save()
       .then((data) => {
@@ -92,6 +92,7 @@ routes.post("/startup", async ({ body }, res) => {
       .save()
       .then((data) => {
         //TODO: get relevant field from data
+        console.log('added data:', data);
         return res.status(200).json({ success: true });
       })
       .catch((e) => {
