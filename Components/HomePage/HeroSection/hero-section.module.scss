@@ -1,0 +1,22 @@
+.container {
+    margin-top:10px;
+    background-color: var(--dark);
+    min-height: 500px;
+    border-radius: 5px;
+}
+.header {
+    color: var(--white);
+    font-size: 30px;
+}   
+.subHeader {
+    color: var(--white);
+    font-size: 20px;
+}
+.carousel{
+    height: 500px;
+
+}
+.carouselContainer{
+    height: 100%;
+    //pause: false;
+}

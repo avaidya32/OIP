@@ -1,0 +1,42 @@
+.container{
+    display:flex;
+    //background-color: var(--dark);
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.col{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--dark);
+    border-radius: 5px;
+    min-width: 100%;
+    min-height: 250px;
+    justify-content: center;
+    margin:10px;
+}
+
+.card p{
+    font-size: small;
+    margin:0px;
+}
+
+.cardContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dropButton{
+}

@@ -1,0 +1,50 @@
+.container{
+    margin: 10px;
+}
+
+.innerContainer{
+
+}
+.formControl{
+    height: 90% !important;
+}
+.formContainer{
+    background-color: var(--dark);
+    padding: 40px;
+    width: 80%;
+    margin-top: 1vh;
+    border-radius: 10px;
+}
+.col{
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--dark);
+    border-radius: 5px;
+    margin-right: 18px;
+    margin-left: 18px;
+    color: var(--white);
+}
+.control{
+    background-color: var(--dark);
+    color: var(--formBorder)
+}
+
+.control:focus{
+    background-color: var(--dark);
+    color:var(--white);
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border-color: var(--formBorder);
+}
+
+//Chrome, etc
+.control::-webkit-inner-spin-button,
+.control::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+}
+
+.control[type='number']{
+    -moz-appearance: textfield;
+}

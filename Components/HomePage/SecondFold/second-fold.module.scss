@@ -1,0 +1,19 @@
+.container {
+    padding: 20px;
+    margin-top:40px;
+    min-height: 350px;
+}
+.header {
+    color: var(--white);
+    font-size: 30px;
+}
+.subHeader {
+    color: var(--white);
+    font-size: 20px;
+}
+.cta {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}

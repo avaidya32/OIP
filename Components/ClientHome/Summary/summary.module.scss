@@ -1,0 +1,37 @@
+.container {
+    color: var(--white);
+    background-color: var(--dark);
+    padding: {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        top: 5px;
+    }
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.col{
+    
+}
+
+.header {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30px;
+    background-color: var(--tertiaryShade);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.subHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    background-color: var(--dark);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}

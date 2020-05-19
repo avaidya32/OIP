@@ -1,0 +1,18 @@
+$theme-colors: (
+    'white': #ffffff,
+    'secondary':#c4c1c1,
+    'dark': #202027,
+    'cta': #1762A7,
+    'textHighlight': #8EBAC5,
+    'secondaryShade': #454749,
+    'tertiaryShade': #466F81,
+    'footerBg': #dedede,
+    'formBorder': #678D98
+);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+$font-family-sans-serif: 'Poppins', sans-serif, 'Segoe UI', Helvetica,
+	'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+$font-family-monospace: 'SFMono-Regular', monospace;
+$body-bg: #2f303a;
+
+@import '../node_modules/bootstrap/scss/bootstrap';

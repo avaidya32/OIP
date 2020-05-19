@@ -1,0 +1,19 @@
+.container{
+    margin-bottom: 15px;
+    padding:30px;
+    background-color: var(--dark);
+    border-radius: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.col{
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    flex-direction: column;
+}
+
+.col p{
+    font-size: larger;
+}

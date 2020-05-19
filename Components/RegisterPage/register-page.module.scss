@@ -1,0 +1,49 @@
+.container {
+    color: var(--white);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--secondary);
+}
+.colPrimary {
+    margin-top: 200px;
+}
+.col {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+}
+.col h5 {
+    margin-bottom: -10px;
+}
+.col h5 a{
+    padding-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.highlight {
+    color: var(--textHighlight) !important;
+}
+.noHighlight {
+    color: var(--white);
+}
+.col h5 a:hover{
+    color: var(--textHighlight);
+    text-decoration: none;
+}
+.formContainer {
+    background-color: var(--dark);
+    padding: 40px;
+    width: 90%;
+    margin-top: 3vh;
+    border-radius: 10px;
+}
+.formContainer p{
+    margin-bottom: 0;
+}
+.formGroup {
+    padding-bottom: 5px;
+}

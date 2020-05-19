@@ -1,0 +1,58 @@
+.container {
+    color: var(--white);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    //padding-bottom: 40vh;
+    margin-bottom: 0px;
+}
+.innerContainer{
+    border-radius: 10px;
+}
+.col {
+    //background-color: var(--dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.formContainer {
+    //display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--dark);
+    padding: 40px;
+    width: 90%;
+    margin-top: 3vh;
+    border-radius: 10px;
+}
+.formContainer p{
+    margin-bottom: 0;
+}
+.formGroup {
+    padding-bottom: 5px;
+}
+.control{
+    background-color: var(--dark);
+    color: var(--formBorder)
+}
+
+.control:focus{
+    background-color: var(--dark);
+    color:var(--white);
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border-color: var(--formBorder);
+}
+
+//Chrome, etc
+.control::-webkit-inner-spin-button,
+.control::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+}
+
+.control[type='number']{
+    -moz-appearance: textfield;
+}

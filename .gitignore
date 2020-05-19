@@ -1,0 +1,11 @@
+node_modules/
+.next
+dist
+yarn.lock 
+yarn-error.log
+.DS_Store
+bundles
+package-lock.json
+.log
+robots.txt*
+keys.js
