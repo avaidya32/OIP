@@ -1,7 +1,7 @@
 import React from "react";
 import HomePage from "../Components/HomePage";
 import Head from "next/head";
-import Layout from '../Components/Common/Layout';
+import Layout2 from '../Components/Common/Layout2';
 
 const MainPage = () => {
   return (
@@ -14,9 +14,9 @@ const MainPage = () => {
           crossOrigin="anonymous"
         />
       </Head>
-      <Layout>
+      <Layout2>
         <HomePage />
-      </Layout>
+      </Layout2>
     </>
   );
 };

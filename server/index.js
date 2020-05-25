@@ -1,7 +1,11 @@
 const express = require("express")();
 const next = require("next");
 const multer = require("multer");
-const GridFsStorage = require("multer-gridfs-storage")
+const GridFsStorage = require("multer-gridfs-storage");
+const session = require("express-session");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
+const expressValidator = require("express-validator");
 
 require("../models/Clients");
 require("../models/Hackathons");
@@ -9,6 +13,10 @@ require("../models/Startups");
 require("../models/Students");
 require("../models/Universities");
 require("../models/VCs");
+require("../models/GoogleUsers");
+require("../models/GithubUsers");
+require("../models/AlternateUsers");
+
 // require("../models/Solutions");
 
 const port = process.env.PORT || 3000;
@@ -41,6 +49,24 @@ app.prepare().then(() => {
       extended: true,
     })
   );
+  // express.use(expressValidator());
+  // express.use(
+  //   session({
+  //     secret: "kpmg cat left right",
+  //     resave: false,
+  //     saveUninitialized: false,
+  //   })
+  // );
+  // express.set('trust proxy', 1)
+
+  express.use(cookieSession({
+    maxAge: 24*60*60*1000,
+    keys:[keys.cookieKey],
+    resave: false
+  }));
+
+  express.use(passport.initialize());
+  express.use(passport.session());
 
   express.use("/api", api);
   express.all("*", (req, res) => handle(req, res));
@@ -53,7 +79,6 @@ app.prepare().then(() => {
   //     cookie: { secure: true },
   //   })
   // );
-  
 
   express.listen(port, (err) => {
     if (err) throw err;

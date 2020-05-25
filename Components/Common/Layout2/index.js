@@ -1,14 +1,14 @@
 import React from "react";
-import Header from "../../Header";
+import Header2 from "../Header2";
 import Head from "next/head";
 
-const Layout = ({ children }) => {
+const Layout2 = ({ children }) => {
   return (
     <div>
       <Head>
         <title>Xelarate</title>
       </Head>
-      <Header
+      <Header2
         style={{ position: "-webkit-sticky", position: "sticky", top: "0" }}
       />
       {children}
@@ -16,4 +16,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default Layout2;

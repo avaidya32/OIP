@@ -17,7 +17,7 @@ const RegisterForm = ({ page }) => {
   const [tech, setTech] = useState("");
   const [year, setYear] = useState("");
   const [specialization, setSpecialization] = useState("");
-
+  
   if (page === "Client") {
     return (
       <div className={styles.formContainer}>
@@ -173,7 +173,7 @@ const RegisterForm = ({ page }) => {
                 })
                 .then((payload) => {
                   console.log("from register client:", payload);
-                  Router.push(`/clientHome?id=${payload.id}`);
+                  Router.push(`/login`);
                 })
                 .catch((e) => {
                   console.log(e);
@@ -388,7 +388,7 @@ const RegisterForm = ({ page }) => {
                 })
                 .then((payload) => {
                   console.log("from register client:", payload, payload.data);
-                  Router.push(`/browseStartup`);
+                  Router.push(`/login`);
                 })
                 .catch((e) => {
                   console.log(e);

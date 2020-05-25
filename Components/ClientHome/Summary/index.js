@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./summary.module.scss";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
-const Summary = () => {
+const Summary = ({client_id}) => {
     return(
         <div className={styles.container}>
             <h4><b>Innovation Summary</b></h4>

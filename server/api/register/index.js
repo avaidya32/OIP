@@ -51,6 +51,7 @@ routes.post("/client", async ({ body }, res) => {
       Sector: Sector,
       username: Username,
       password: Password,
+      Role:"Client"
     })
       .save()
       .then((data) => {
@@ -88,6 +89,7 @@ routes.post("/startup", async ({ body }, res) => {
       Tech: Tech,
       username: Username,
       password: Password,
+      Role:"Startup"
     })
       .save()
       .then((data) => {
@@ -107,6 +109,7 @@ routes.post("/startup", async ({ body }, res) => {
 routes.post("/student", async ({ body }, res) => {
   const {
     Name,
+    GoogleID,
     Email,
     University,
     Number,
@@ -117,6 +120,7 @@ routes.post("/student", async ({ body }, res) => {
   } = body;
   try {
     new Students({
+      GoogleID: GoogleID,
       Name: Name,
       EmailID: Email,
       PhNumber: Number,
@@ -124,11 +128,12 @@ routes.post("/student", async ({ body }, res) => {
       Year: Year,
       Specialization: Specialization,
       username: Username,
-      password: password,
+      password: Password,
     })
       .save()
       .then((data) => {
-        return res.status(200).json({ success: true, data: client1 });
+        console.log('data student:', data);
+        return res.status(200).json({ success: true });
       })
       .catch((e) => {
         console.log("Could not add data:", e);
@@ -154,7 +159,7 @@ routes.post("/university", async ({ body }, res) => {
       PhNumber: Number,
       University: University,
       username: Username,
-      password: password,
+      password: Password,
     })
       .save()
       .then((data) => {

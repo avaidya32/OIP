@@ -5,6 +5,7 @@ const register = require("./register");
 const hackathon = require("./hackathon");
 const upload = require('./upload');
 const startup = require('./startup');
+const auth = require('./auth');
 
 // dbConnect();
 
@@ -14,6 +15,7 @@ routes.use("/register", register);
 routes.use("/startup", startup);
 routes.use("/test", test);
 routes.use("/upload", upload);
+routes.use("/auth", auth);
 routes.get("/", (req, res) => {
   res.status(200).json({ message: "Connected!" });
 });

@@ -2,7 +2,7 @@ import React from "react";
 import ApplyProblem from "../Components/ApplyProblem";
 import Layout from "../Components/Common/Layout";
 
-const Apply = ({data}) => {
+const Apply = ({ data }) => {
   return (
     <Layout>
       <ApplyProblem dataObject={data} />
@@ -11,6 +11,11 @@ const Apply = ({data}) => {
 };
 
 Apply.getInitialProps = async ({ query, res, req }) => {
+  if (!req.user) {
+    res.redirect("/login");
+  } else if (req.user.Role != "Startup" && req.user.Role === "Client") {
+    res.redirect("/clientHome");
+  }
   const { name } = query;
   const data = await fetch("http://localhost:3000/api/hackathon/getinfo", {
     method: "POST",
@@ -25,9 +30,9 @@ Apply.getInitialProps = async ({ query, res, req }) => {
       return result.json();
     })
     .then((payload) => {
-      return  payload ;
+      return payload;
     });
-  return {data};
+  return { data };
 };
 
 export default Apply;

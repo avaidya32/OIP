@@ -13,6 +13,11 @@ const StartupView = ({ data }) => {
 };
 
 StartupView.getInitialProps = async ({ query, res, req }) => {
+  if (!req.user) {
+    res.redirect("/login");
+  } else if (req.user.Role != "Client" && req.user.Role === "Startup") {
+    res.redirect("/startupHome");
+  }
   const { id } = query;
   const data = await fetch("http://localhost:3000/api/startup/getinfo", {
     method: "POST",

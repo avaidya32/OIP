@@ -1,0 +1,41 @@
+.container {
+    //   position: fixed;
+      top: 0px;
+      left: 0px;
+      height: 70px;
+      width: 100%;
+      display: flex;
+      align-items: right;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      // box-shadow: 0 1px 6px 0 rgba(32,33,36,.28);
+    }
+    .logo {
+      padding: 10px;
+      padding-left: 35px;
+      left: 0px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .logo a{
+        color: var(--white) !important;
+    }
+    .logo a:hover {
+        text-decoration: none !important;
+    }
+    .list {
+        display: flex;
+        padding-right: 40px;
+    }
+    .list a {
+        color: var(--white);
+        padding: {
+            right: 20px;
+            left: 20px;
+        }
+    }
+    .list a:hover {
+        color: var(--secondary);
+        text-decoration: none;
+    }

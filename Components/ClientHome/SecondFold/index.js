@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './second-fold.module.scss';
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
+import Router from "next/Router";
 
-const SecondFold = () => {
+const SecondFold = ({client_id}) => {
     return (
         <div className = {styles.container}> 
             <Container>
@@ -11,7 +12,10 @@ const SecondFold = () => {
                         <h3><b>Start a Hackathon!</b></h3>
                         <span style = {{fontSize: 14}}>Post a problem to be 
                         solved by our community of curated Startups and Universities</span>
-                        <Button variant = "cta" size = "md" style = {{margin: 10}} href="/startHackathon">Post a problem</Button>
+                        <Button variant = "cta" size = "md" style = {{margin: 10}} onClick={(e) =>{
+                            e.preventDefault();
+                            Router.push(`/startHackthon`);
+                        }}>Post a problem</Button>
                     </Col>
                     <Col>
                         <Image src="/hacka.jpg" height = {200} width = "100%"/>
@@ -22,7 +26,7 @@ const SecondFold = () => {
                         <h3><b>Browse our Startup Community</b></h3>
                         <span style = {{fontSize: 14}}>Apply filters to suit your needs and get instant access 
                         to our Startup Community to just browse, acquire or buy products.</span>
-                        <Button variant = "cta" size = "md" style = {{margin: 10}}>Browse Startups</Button>
+                        <Button variant = "cta" size = "md" style = {{margin: 10}} href="/browseStartup">Browse Startups</Button>
                     </Col>
                     <Col>
                         <Image src="/browse.jpg" height = {200} width = "100%"/>

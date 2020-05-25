@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const HackathonsSchema = new mongoose.Schema({
+    ClientId:{
+        type:String,
+        require:[true],
+        unique:false,
+        trim:true
+    },
     OrgName:{
         type: String,
         required: [false],

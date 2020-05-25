@@ -20,8 +20,8 @@ routes.get("/getinfo", async (req, res) => {
 
 routes.post("/getinfo", async ({ body }, res) => {
   try {
-    const { name } = body;
-    var query = Hackathons.findOne({'ProblemName':name});
+    const { name, id } = body;
+    var query = Hackathons.findById(id);
     query.exec(function (err, hackathons) {
       if (err) {
         return res.status(500).json({ error: "error while retrieving data" });
@@ -35,6 +35,7 @@ routes.post("/getinfo", async ({ body }, res) => {
 
 routes.post("/putinfo", async ({ body }, res) => {
   const {
+    ClientId,
     OrgName,
     ProblemName,
     Mode,
@@ -47,6 +48,7 @@ routes.post("/putinfo", async ({ body }, res) => {
   } = body;
   try {
     new Hackathons({
+      ClientId: ClientId,
       OrgName: OrgName,
       ProblemName: ProblemName,
       Mode: Mode,
@@ -59,14 +61,10 @@ routes.post("/putinfo", async ({ body }, res) => {
     })
       .save()
       .then((data) => {
-        const {ProblemName, _id} = data;
+        const {_id} = data;
         return res.status(200).json({
-          name: ProblemName,
-          id: _id
+          id: data._id,
         })
-      })
-      .then((data) =>{
-        
       })
       .catch((e) => {
         console.log("Could not add data:", e);

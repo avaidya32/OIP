@@ -16,11 +16,16 @@ const Prob = ({ data }) => {
 };
 
 Prob.getInitialProps = async ({ query, res, req }) => {
-  const { name } = query;
+  if (!req.user) {
+    res.redirect("/login");
+  } else if (req.user.Role != "Client" && req.user.Role === "Startup") {
+    res.redirect("/startupHome");
+  }
+  const { id } = query;
   const data = await fetch("http://localhost:3000/api/hackathon/getinfo", {
     method: "POST",
     body: JSON.stringify({
-      name: name,
+      id: id,
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -30,9 +35,9 @@ Prob.getInitialProps = async ({ query, res, req }) => {
       return response.json();
     })
     .then((payload) => {
-      return payload ;
+      return payload;
     });
-    return {data}
+  return { data };
 };
 
 export default Prob;

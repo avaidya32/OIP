@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 // const express = require('express');
 // const routes = express().Router();
-import Router from "next/router";
+import Router from "next/Router";
 import styles from "./start-hackathon.module.scss";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 
-const StartHackathon = () => {
+const StartHackathon = ({ client_id }) => {
   const [problemName, setProblemName] = useState("");
   const [orgname, setOrgName] = useState("");
   const [mode, setMode] = useState("");
@@ -16,6 +16,7 @@ const StartHackathon = () => {
   const [reward, setReward] = useState("");
   const [link, setLink] = useState("");
   const [file, setFile] = useState();
+  console.log(file);
   return (
     <div className={styles.container}>
       <Container>
@@ -202,6 +203,7 @@ const StartHackathon = () => {
                     fetch("/api/hackathon/putinfo", {
                       method: "POST",
                       body: JSON.stringify({
+                        ClientId: client_id,
                         OrgName: orgname,
                         ProblemName: problemName,
                         Mode: mode,
@@ -220,27 +222,30 @@ const StartHackathon = () => {
                         return res.json();
                       })
                       .then((payload) => {
-                        const { name, id } = payload;
-                        // fetch("/api/upload", {
-                        //   method: "POST",
-                        //   body: JSON.stringify({
-                        //     file: file,
-                        //     id: id
-                        //   }),
-                        //   headers: {
-                        //     "Content-type": "application/json; charset=UTF-8",
-                        //   },
-                        // })
-                        //   .then((res) => {
-                        //     return res.json();
-                        //   })
-                        //   .then((response) => {
-                        //     Router.push(`/probPage?name=${name}`);
-                        //   })
-                        //   .c;tch((e) => {
-                        //     //TODO:
-                        //   })
-                        Router.push(`/probPage?name=${name}`);
+                        const { name, _id } = payload;
+                        const formData = new FormData();
+                        console.log(formData);
+                        formData.append("file", file);
+                        fetch(`/api/upload?id=${_id}`, {
+                          method: "POST",
+                          // body: JSON.stringify({
+                          //   file: formData,
+                          //   // name: name
+                          //   name: problemName
+                          // })
+                          body: formData,
+                        })
+                          .then((res) => {
+                            return res.json();
+                          })
+                          .then((response) => {
+                            Router.push(`/probPage?id=${_id}`);
+                          })
+                          .catch((e) => {
+                            console.log("error while calling /upload", e);
+                            //TODO:
+                          });
+                        //Router.push(`/probPage?name=${name}`);
                       })
                       .catch((e) => {
                         console.log(e);

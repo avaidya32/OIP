@@ -9,6 +9,16 @@ const StudentsSchema = new mongoose.Schema({
     trim: true,
     maxLength: [100, "Name can't be more than 100 characters"],
   },
+  GoogleID: {
+    type: String,
+    required: false,
+    unique: false
+  },
+  GithubID:{
+    type:String,
+    required: false,
+    trim:true,
+  },
   EmailID: {
     type: String,
     required: [true, "Please add email"],
@@ -40,13 +50,6 @@ const StudentsSchema = new mongoose.Schema({
   Specialization: {
     type: String,
     required: [true, "Please add Specialization"],
-    unique: false,
-    trim: true,
-    maxLength: 30,
-  },
-  Tech: {
-    type: String,
-    required: [false],
     unique: false,
     trim: true,
     maxLength: 30,

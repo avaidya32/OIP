@@ -56,17 +56,3 @@
 .control[type='number']{
     -moz-appearance: textfield;
 }
-.col h5 {
-    margin-bottom: -10px;
-}
-.col h5 a{
-    padding-right: 10px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.highlight {
-    color: var(--textHighlight) !important;
-}
-.noHighlight {
-    color: var(--white);
-}

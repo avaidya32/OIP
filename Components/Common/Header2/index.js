@@ -1,11 +1,11 @@
 import React from "react";
 //import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import HomePage from "../HomePage";
+//import HomePage from "../HomePage";
 import styles from "./header.module.scss";
 import { Image } from "react-bootstrap";
 import { Navbar, Nav } from "react-bootstrap";
 
-const Header = () => {
+const Header2 = () => {
   return (
     // <div className = {styles.container}>
     //   <div className = {styles.logo}>
@@ -29,12 +29,12 @@ const Header = () => {
         />{" "}
       </Navbar.Brand>
       <Nav className="mr-auto" style={{display:"flex", alignItems:"right", justifyContent:"right", flexDirection:"row"}}>
-        {/* <Nav.Link href="/login" style={{marginRight: "150vh"}}>Login</Nav.Link> */}
-        <Nav.Link href="/api/auth/logout">Logout</Nav.Link>
-        <Nav.Link href="/">Contact Us</Nav.Link>
+        <Nav.Link href="/login" style={{marginRight: "150vh"}}>Login</Nav.Link>
+        <Nav.Link>About</Nav.Link>
+        <Nav.Link>Contact</Nav.Link>
       </Nav>
     </Navbar>
   );
 };
 
-export default Header;
+export default Header2;
