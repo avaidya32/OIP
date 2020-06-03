@@ -28,7 +28,15 @@ const Header = () => {
           className="d-inline-block align-top"
         />{" "}
       </Navbar.Brand>
-      <Nav className="mr-auto" style={{display:"flex", alignItems:"right", justifyContent:"right", flexDirection:"row"}}>
+      <Nav
+        className="mr-auto"
+        style={{
+          display: "flex",
+          alignItems: "right",
+          justifyContent: "right",
+          flexDirection: "row",
+        }}
+      >
         {/* <Nav.Link href="/login" style={{marginRight: "150vh"}}>Login</Nav.Link> */}
         <Nav.Link href="/api/auth/logout">Logout</Nav.Link>
         <Nav.Link href="/">Contact Us</Nav.Link>

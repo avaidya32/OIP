@@ -3,17 +3,16 @@ import ApplyProblem from "../Components/ApplyProblem";
 import AdditionalInfo from "../Components/AdditionalInfo";
 import Layout from "../Components/Common/Layout";
 
-const Additional = ({ GoogleId }) => {
+const Additional = ({ user }) => {
   return (
     <Layout>
-      <AdditionalInfo GoogleId ={GoogleId} />
+      <AdditionalInfo user={user} />
     </Layout>
   );
 };
 
 Additional.getInitialProps = async ({ query, res, req }) => {
-  const {GoogleId} = query;
-  console.log('getprops:',query);
-  return { GoogleId: query.GoogleId};
+  console.log("getprops:", req.user);
+  return { user: req.user };
 };
 export default Additional;

@@ -22,6 +22,7 @@ Prob.getInitialProps = async ({ query, res, req }) => {
     res.redirect("/startupHome");
   }
   const { id } = query;
+  console.log("getprops probpage id", id);
   const data = await fetch("http://localhost:3000/api/hackathon/getinfo", {
     method: "POST",
     body: JSON.stringify({
@@ -37,6 +38,7 @@ Prob.getInitialProps = async ({ query, res, req }) => {
     .then((payload) => {
       return payload;
     });
+  console.log(data);
   return { data };
 };
 

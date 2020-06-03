@@ -4,6 +4,9 @@
     align-items: center;
     justify-content: center;
 }
+.col p{
+    overflow-wrap: break-word;
+}
 
 .container{
     border-width: 10px;

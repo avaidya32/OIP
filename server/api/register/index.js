@@ -56,7 +56,7 @@ routes.post("/client", async ({ body }, res) => {
       .save()
       .then((data) => {
         const {_id} = data;
-        return res.status(200).json({ id: _id });
+        res.redirect(`/clientHome?id=${data._id}`);
       })
       .catch((e) => {
         console.log("Could not add data:", e);
@@ -95,7 +95,7 @@ routes.post("/startup", async ({ body }, res) => {
       .then((data) => {
         //TODO: get relevant field from data
         console.log('added data:', data);
-        return res.status(200).json({ success: true });
+        res.redirect(`/startupHome?id=${data._id}`);
       })
       .catch((e) => {
         console.log("Could not add data:", e);

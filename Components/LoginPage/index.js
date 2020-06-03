@@ -10,6 +10,7 @@ import GoogleButton from "react-google-button";
 import Router from "next/router";
 import { GithubLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
+import {ParallaxProvider} from "react-scroll-parallax";
 
 const LoginPage = () => {
   const [page, togglePage] = useState("Client");
@@ -36,6 +37,7 @@ const LoginPage = () => {
   }
 
   return (
+    <ParallaxProvider>
     <div className={styles.container}>
       <Container className={styles.innerContainer}>
         <Row>
@@ -144,7 +146,11 @@ const LoginPage = () => {
               />
               <GithubLoginButton
                 onClick={(e) => {
-                  Router.push("/api/auth/github");
+                  if (page === "Client") {
+                    Router.push("/api/auth/github-client");
+                  } else if (page === "Startup") {
+                    Router.push("/api/auth//github-startup");
+                  }
                 }}
               />
             </div>
@@ -152,6 +158,7 @@ const LoginPage = () => {
         </Row>
       </Container>
     </div>
+    </ParallaxProvider>
   );
 };
 

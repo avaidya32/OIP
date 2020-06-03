@@ -10,13 +10,17 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import Summary from "./Summary"
-import SecondFold from "./SecondFold"
+import ThirdFold from "./SecondFold"
+import Summary2 from "../../Components/ApplyProblem/Summary";
+import SecondFold from "../../Components/ApplyProblem/SecondFold";
 
 const ProbPage = ({dataObject}) =>{
     return(
         <div className={styles.container}>
-                <Summary body={dataObject}/>
-                <SecondFold />
+                {/* <Summary body={dataObject}/> */}
+                <Summary2 body={dataObject} />
+                <SecondFold body={dataObject} />
+                <ThirdFold />
         </div>
     )
 }

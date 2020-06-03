@@ -16,11 +16,11 @@ Apply.getInitialProps = async ({ query, res, req }) => {
   } else if (req.user.Role != "Startup" && req.user.Role === "Client") {
     res.redirect("/clientHome");
   }
-  const { name } = query;
+  const { id } = query;
   const data = await fetch("http://localhost:3000/api/hackathon/getinfo", {
     method: "POST",
     body: JSON.stringify({
-      name: name,
+      id:id,
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8",

@@ -127,7 +127,7 @@ const SecondFold = ({ body }) => {
                         <b>{element.OrgName}</b>
                       </Card.Title>
                       <Card.Text style={{ marginBottom: "8px" }}>
-                        <p>Sector: {element.Sector}</p>
+                        <p>Sector {element.Sector}</p>
                         <p>Technology: {element.Tech}</p>
                       </Card.Text>
                       <Button

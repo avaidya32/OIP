@@ -27,7 +27,7 @@ conn.once("open", () => {
 var storage = new GridFsStorage({
   url: keys.mongoURI,
   file: (req, file) => {
-    console.log("in storage1:", req);
+    console.log("in storage:", req.query.id);
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
         if (err) {
@@ -47,7 +47,8 @@ var storage = new GridFsStorage({
 const upload = multer({ storage });
 
 routes.post("/", upload.single("file"), (req, res) => {
-  return res.json(500);
+  console.log(req.query.id);
+  res.redirect(`/probpage?id=${req.query.id}`);
 });
 
 routes.get("/image", (req, res) => {

@@ -18,7 +18,7 @@ const StartupsSchema = new mongoose.Schema({
   EmailID: {
     type: String,
     required: false,
-    unique: true,
+    unique: false,
     trim: true,
     maxLength: [60, "Email can't be more than 40 characters"],
   },

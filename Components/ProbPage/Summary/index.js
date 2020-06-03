@@ -16,7 +16,7 @@ const Summary = ({ body }) => {
       <Container>
         <Row className={styles.innerContainer}>
           <Col className={styles.col}>
-            <Image src={`/api/upload/image?name=file_${body.ProblemName}`} height={250} width="80%" fluid />
+            <Image src={`/api/upload/image?name=file_${body._id}`} height={250} width="80%" fluid />
           </Col>
           <Col className={styles.col}>
             <h2>

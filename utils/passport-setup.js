@@ -1,7 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20");
 const GithubStrategy = require("passport-github2");
-const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const keys = require("../config/keys");
 const mongoose = require("mongoose");
 require("../models/Clients");
@@ -137,6 +137,7 @@ passport.use(
 );
 
 passport.use(
+  "github-client",
   new GithubStrategy(
     {
       clientID: keys.GITHUB_CLIENT_ID,
@@ -144,16 +145,49 @@ passport.use(
       callbackURL: "http://localhost:3000/api/auth/github/redirect",
     },
     function (accessToken, refreshToken, profile, done) {
-      AlternateUsers.findOne({ GithubId: profile.id }).then((currentUser) => {
+      Clients.findOne({ GithubID: profile.id }).then((currentUser) => {
         if (currentUser) {
           //user exists
           console.log("user is", currentUser);
           done(null, currentUser);
         } else {
           //create new user
-          new AlternateUsers({
-            Email: profile.email,
-            GithubId: profile.id,
+          new Clients({
+            EmailID: profile.email,
+            GithubID: profile.id,
+            Role:"Client"
+          })
+            .save()
+            .then((newUser) => {
+              console.log("new user created", newUser);
+              done(null, newUser);
+            });
+        }
+      });
+    }
+  )
+);
+
+passport.use(
+  "github-startup",
+  new GithubStrategy(
+    {
+      clientID: keys.GITHUB_CLIENT_ID,
+      clientSecret: keys.GITHUB_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/api/auth/github/redirect/startup",
+    },
+    function (accessToken, refreshToken, profile, done) {
+      Startups.findOne({ GithubID: profile.id }).then((currentUser) => {
+        if (currentUser) {
+          //user exists
+          console.log("user is", currentUser);
+          done(null, currentUser);
+        } else {
+          //create new user
+          new Startups({
+            EmailID: profile.email,
+            GithubID: profile.id,
+            Role:"Startup"
           })
             .save()
             .then((newUser) => {

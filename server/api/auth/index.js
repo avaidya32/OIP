@@ -44,8 +44,10 @@ routes.get(
     console.log("in callback");
     // res.redirect('/additionalInfo');
     req.session.user = req.user;
-    if (req.user.Role === "Client") {
+    if (req.user.Role === "Client" && req.user.Desc) {
       res.redirect("/clientHome");
+    } else {
+      res.redirect("/additionalInfo");
     }
     // else if(req.user.Role === "Startup"){
     //   res.redirect('/startupHome');
@@ -64,18 +66,15 @@ routes.get(
     console.log("in callback");
     // res.redirect('/additionalInfo');
     req.session.user = req.user;
-    // if (req.user.Role === "Client") {
-    //   res.redirect("/clientHome");
-    // }
-    // else
-    if (req.user.Role === "Startup") {
+    if (req.user.Role === "Startup" && req.user.Desc) {
       res.redirect("/startupHome");
+    } else {
+      res.redirect("/additionalInfo");
     }
-    // res.redirect(
-    //   `http://localhost:3000/additionalInfo?GoogleId=${req.user.GoogleId}`
-    // );
   }
 );
+
+/////////////////////////////////////////////////////////////
 
 routes.get("/logout", (req, res) => {
   req.logout();
@@ -85,15 +84,39 @@ routes.get("/logout", (req, res) => {
 routes.get("/google/current_user", (req, res) => {
   res.send(req.user);
 });
-routes.get("/github", passport.authenticate("github", { scope: ["user"] }));
 
-routes.get("/github/redirect", passport.authenticate("github"), (req, res) => {
-  console.log("here:", req.user);
-  console.log("in callback");
-  // res.redirect('/additionalInfo');
-  res.redirect(
-    `http://localhost:3000/additionalInfo?GithubId=${req.user.GithubId}`
-  );
-});
+////////////////////////////////////////////////////////////
+
+routes.get(
+  "/github-client",
+  passport.authenticate("github-client", { scope: ["user"] })
+);
+
+routes.get(
+  "/github/redirect",
+  passport.authenticate("github-client"),
+  (req, res) => {
+    console.log("here:", req.user);
+    console.log("in callback");
+
+    res.redirect("/clientHome");
+  }
+);
+
+routes.get(
+  "/github-startup",
+  passport.authenticate("github-startup", { scope: ["user"] })
+);
+
+routes.get(
+  "/github/redirect/startup",
+  passport.authenticate("github-startup"),
+  (req, res) => {
+    console.log("here:", req.user);
+    console.log("in callback");
+
+    res.redirect("/startupHome");
+  }
+);
 
 module.exports = routes;

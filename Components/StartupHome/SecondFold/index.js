@@ -64,7 +64,7 @@ const SecondFold = ({ body }) => {
                         <p>Duration: {element.Duration}</p>
                         <p>Reward: {element.Reward}</p>
                       </Card.Text>
-                      <Button variant="cta" marginTop="10px" href = {`/applyProblem?name=${element.ProblemName}`}
+                      <Button variant="cta" marginTop="10px" href = {`/applyProblem?id=${element._id}`}
                       >
                         Check it out
                       </Button>

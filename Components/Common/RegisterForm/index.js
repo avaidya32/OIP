@@ -17,7 +17,7 @@ const RegisterForm = ({ page }) => {
   const [tech, setTech] = useState("");
   const [year, setYear] = useState("");
   const [specialization, setSpecialization] = useState("");
-  
+
   if (page === "Client") {
     return (
       <div className={styles.formContainer}>
@@ -102,7 +102,7 @@ const RegisterForm = ({ page }) => {
           </Form.Group>
           <p>Sector of Industry:</p>
           <Form.Group controlId="OrgSec" className={styles.formGroup}>
-            <Form.Control
+            {/* <Form.Control
               maxLength={30}
               aria-label="name-edit"
               className={styles.control}
@@ -113,7 +113,38 @@ const RegisterForm = ({ page }) => {
                 event.preventDefault();
                 setSector(event.target.value);
               }}
-            />
+            /> */}
+            <DropdownButton
+              variant="cta"
+              title="Sector of Industry"
+              size="sm"
+              style={{ marginRight: "10px" }}
+            >
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={() => {
+                  setSector("Pharmaceutical");
+                }}
+              >
+                Pharmaceutical
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-2"
+                onClick={() => {
+                  setSector("Financial");
+                }}
+              >
+                Financial
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-3"
+                onClick={() => {
+                  setSector("IT");
+                }}
+              >
+                IT
+              </Dropdown.Item>
+            </DropdownButton>
           </Form.Group>
           <p>Username:</p>
           <Form.Group controlId="username" className={styles.formGroup}>
@@ -316,7 +347,7 @@ const RegisterForm = ({ page }) => {
           </Form.Group>
           <p>Specialization:</p>
           <Form.Group controlId="Spec" className={styles.formGroup}>
-            <Form.Control
+            {/* <Form.Control
               maxLength={30}
               aria-label="name-edit"
               className={styles.control}
@@ -327,7 +358,38 @@ const RegisterForm = ({ page }) => {
                 event.preventDefault();
                 setTech(event.target.value);
               }}
-            />
+            /> */}
+            <DropdownButton
+              variant="cta"
+              title="Sector of Industry"
+              size="sm"
+              style={{ marginRight: "10px" }}
+            >
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={() => {
+                  setTech("5G");
+                }}
+              >
+                5G
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-2"
+                onClick={() => {
+                  setTech("IoT");
+                }}
+              >
+                IoT
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-3"
+                onClick={() => {
+                  setTech("ML");
+                }}
+              >
+                ML
+              </Dropdown.Item>
+            </DropdownButton>
           </Form.Group>
           <p>Username:</p>
           <Form.Group controlId="username" className={styles.formGroup}>

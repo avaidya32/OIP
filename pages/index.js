@@ -1,7 +1,8 @@
 import React from "react";
 import HomePage from "../Components/HomePage";
 import Head from "next/head";
-import Layout2 from '../Components/Common/Layout2';
+import Layout2 from "../Components/Common/Layout2";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 const MainPage = () => {
   return (
@@ -19,6 +20,17 @@ const MainPage = () => {
       </Layout2>
     </>
   );
+};
+
+MainPage.getInitialProps = async ({ query, res, req }) => {
+  if (req.user) {
+    if (req.user.Role === "Client") {
+      res.redirect("/clientHome");
+    } else if (req.user.Role === "Startup") {
+      res.redirect("/startupHome");
+    }
+  }
+  return { user: req.user };
 };
 
 export default MainPage;

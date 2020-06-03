@@ -6,7 +6,7 @@ import { Link, animateScroll } from "react-scroll";
 const HeroSection = () => {
   return (
     <div className={styles.container}>
-      <Container style={{ maxWidth: "100%", maxHeight: "100%", borderRadius:"5px"}}>
+      <Container style={{ maxWidth: "100%", maxHeight: "100%", borderRadius:"5px", marginTop:"5px"}}>
         <Row>
           <Col style={{ paddingLeft: 0, borderRadius: "5px" }}>
             <Carousel className={styles.carouselContainer}>

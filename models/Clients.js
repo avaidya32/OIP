@@ -28,21 +28,21 @@ const ClientsSchema = new mongoose.Schema({
   EmailID: {
     type: String,
     required: false,
-    unique: true,
+    unique: false,
     trim: true,
     maxlength: [60, "Email can't be more than 40 characters"],
   },
   PhNumber: {
     type: Number,
     required: false,
-    unique: true,
+    unique: false,
     trim: true,
     maxlength: 10,
   },
   Desc: {
     type: String,
     required: false,
-    unique: true,
+    unique: false,
     trim: true,
     maxlength: 300,
   },
@@ -56,7 +56,7 @@ const ClientsSchema = new mongoose.Schema({
   username: {
     type: String,
     required: false,
-    unique: true,
+    unique: false,
     trim: true,
     maxlength: [40, "Username can't be more than 40 characters"],
   },

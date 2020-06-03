@@ -22,7 +22,7 @@ const SecondFold = ({ body }) => {
             </Col>
           </Row>
           <Row>
-            <Col className={styles.col}>{body.Statement}</Col>
+            <Col className={styles.col}><p>{body.Statement}</p></Col>
           </Row>
         </Container>
       </Element>
