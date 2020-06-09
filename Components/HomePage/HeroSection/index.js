@@ -6,49 +6,78 @@ import { Link, animateScroll } from "react-scroll";
 const HeroSection = () => {
   return (
     <div className={styles.container}>
-      <Container style={{ maxWidth: "100%", maxHeight: "100%", borderRadius:"5px", marginTop:"5px"}}>
+      <Container
+        style={{
+          maxWidth: "100%",
+          maxHeight: "100%",
+          borderRadius: "5px",
+          marginTop: "5px",
+        }}
+      >
         <Row>
           <Col style={{ paddingLeft: 0, borderRadius: "5px" }}>
             <Carousel className={styles.carouselContainer}>
               <Carousel.Item className={styles.carousel}>
-                <img
-                  className="d-block w-100"
-                  src="3.jpg"
-                  alt="First slide"
-                  height="500px"
-                  fluid
-                />
+                <div className={styles.imgContainer}>
+                  <img
+                    className={styles.img}
+                    src="post_prob.svg"
+                    alt="First slide"
+                    height="500px"
+                    fluid
+                  />
+                </div>
                 <Carousel.Caption>
-                  <h3></h3>
-                  <p></p>
+                  <h4>
+                    <span style={{ color: "var(--textHighlight)" }}>
+                      Post Hackathons/Ideathons
+                    </span>
+                  </h4>
+                  <p>
+                    As an Enterprise, you can post tailored Hackathons/Ideathons
+                    on our Platform.
+                  </p>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item className={styles.carousel}>
-                <img
-                  className="d-block w-100"
-                  src="hacka.jpg"
-                  alt="Third slide"
-                  height="500px"
-                  fluid
-                />
-
+                <div className={styles.imgContainer}>
+                  <img
+                    className={styles.img}
+                    src="browse.svg"
+                    alt="Third slide"
+                    height="500px"
+                    fluid
+                  />
+                </div>
                 <Carousel.Caption>
-                  <h3></h3>
-                  <p></p>
+                  <h4>
+                    <span style={{ color: "var(--textHighlight)" }}>
+                      Browse Startups/Students
+                    </span>
+                  </h4>
+                  <p>
+                    As an Enterprise, our platform connects you to upcoming
+                    Startups and our Student community.
+                  </p>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item className={styles.carousel}>
-                <img
-                  className="d-block w-100"
-                  src="globe.jpg"
-                  alt="Third slide"
-                  height="500px"
-                  fluid
-                />
-
+                <div className={styles.imgContainer}>
+                  <img
+                    className={styles.img}
+                    src="post_soln.svg"
+                    alt="Third slide"
+                    height="500px"
+                    fluid
+                  />
+                </div>
                 <Carousel.Caption>
-                  <h3></h3>
-                  <p></p>
+                  <h4>
+                    <span style={{ color: "var(--textHighlight)" }}>
+                      Participate in Hackathons/Ideathons
+                    </span>
+                  </h4>
+                  <p>As a registered Startup or Student on our platform, you can participate in Hackathons/Ideathons.</p>
                 </Carousel.Caption>
               </Carousel.Item>
             </Carousel>
@@ -74,7 +103,7 @@ const HeroSection = () => {
                 to="reglog"
                 spy={true}
                 smooth={true}
-                offset={-10}
+                offset={-80}
                 activeClass="active"
               >
                 <Button variant="cta" size="lg" href="/register" margin="20px">

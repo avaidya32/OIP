@@ -8,10 +8,42 @@ import {
   ProgressBar,
   ListGroup,
   Button,
+  Accordion,
+  Card,
 } from "react-bootstrap";
 import { Link, animateScroll } from "react-scroll";
 
 const Summary = ({ body }) => {
+  if (!body.Phase3 && body.Phase1) {
+    var phase = 1;
+    var phases = [body.Phase1];
+  } else if (body.Phase3 && !body.Phase4) {
+    var phase = 3;
+    var phases = [body.Phase1, body.Phase2, body.Phase3];
+  } else if (body.Phase4 && !body.Phase5) {
+    var phase = 4;
+    var phases = [body.Phase1, body.Phase2, body.Phase3, body.Phase4];
+  } else if (body.Phase5 && !body.Phase6) {
+    var phase = 5;
+    var phases = [
+      body.Phase1,
+      body.Phase2,
+      body.Phase3,
+      body.Phase4,
+      body.Phase5,
+    ];
+  } else if (body.Phase6) {
+    var phase = 6;
+    var phases = [
+      body.Phase1,
+      body.Phase2,
+      body.Phase3,
+      body.Phase4,
+      body.Phase5,
+      body.Phase6,
+    ];
+  }
+  console.log(body);
   if (body.Type === "Application-based") {
     return (
       <Container className={styles.container}>
@@ -23,6 +55,12 @@ const Summary = ({ body }) => {
               width="60%"
               fluid
             />
+            <a
+              href={`/api/upload/image?name=file_${body._id}`}
+              download="lalal.jpg"
+            >
+              Download
+            </a>
           </Col>
           <Col className={styles.col}>
             <h2 style={{ color: "var(--tertiaryShade)" }}>
@@ -61,7 +99,9 @@ const Summary = ({ body }) => {
                 {body.Reward}
               </ListGroup.Item>
               <ListGroup.Item style={{ backgroundColor: "var(--dark)" }}>
-                <span style={{ color: "var(--textHighlight)" }}>Application: </span>
+                <span style={{ color: "var(--textHighlight)" }}>
+                  Application:{" "}
+                </span>
                 {body.Application}
               </ListGroup.Item>
               <ListGroup.Item style={{ backgroundColor: "var(--dark)" }}>
@@ -85,11 +125,51 @@ const Summary = ({ body }) => {
               </Link>
             </h5>
           </Col>
+          <Col className={styles.col}>
+            <h2 style={{ color: "var(--tertiaryShade)" }}>
+              Phases of the Hackathon:
+            </h2>
+            {phases.map((element, index) => {
+              return (
+                <Accordion defaultActiveKey="0">
+                  <Card
+                    style={{
+                      backgroundColor: "var(--dark)",
+                      // border: "1px ridge var(--white)",
+                      borderBottom: "0",
+                      boxShadow:
+                        "0 15px 15px -3px rgba(0,0,0,.1), 0 15px 15px -2px rgba(0,0,0,.05)",
+                    }}
+                  >
+                    <Accordion.Toggle
+                      as={Card.Header}
+                      eventKey={index}
+                      style={{ color: "var(--textHighlight)" }}
+                    >
+                      Phase {index + 1}:{" "}
+                      <span style={{ color: "var(--white)" }}>
+                        {element.Name}
+                      </span>
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey={index}>
+                      <Card.Body>
+                        {element.Desc}
+                        <br />
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
+              );
+            })}
+            <br />
+            <h5>
+              <a href={`/postsolution?hack_id=${body._id}`}>Post Solution</a>
+            </h5>
+          </Col>
         </Row>
       </Container>
     );
-  }
-  else if(body.Type==="Code-sprint"){
+  } else if (body.Type === "Code-sprint") {
     return (
       <Container className={styles.container}>
         <Row className={styles.innerContainer}>
@@ -158,10 +238,51 @@ const Summary = ({ body }) => {
               </Link>
             </h5>
           </Col>
+          <Col className={styles.col}>
+            <h2 style={{ color: "var(--tertiaryShade)" }}>
+              Phases of the Hackathon:
+            </h2>
+            {phases.map((element, index) => {
+              return (
+                <Accordion defaultActiveKey="0">
+                  <Card
+                    style={{
+                      backgroundColor: "var(--dark)",
+                      // border: "1px ridge var(--white)",
+                      borderBottom: "0",
+                      boxShadow:
+                        "0 15px 15px -3px rgba(0,0,0,.1), 0 15px 15px -2px rgba(0,0,0,.05)",
+                    }}
+                  >
+                    <Accordion.Toggle
+                      as={Card.Header}
+                      eventKey={index}
+                      style={{ color: "var(--textHighlight)" }}
+                    >
+                      Phase {index + 1}:{" "}
+                      <span style={{ color: "var(--white)" }}>
+                        {element.Name}
+                      </span>
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey={index}>
+                      <Card.Body>
+                        {element.Desc}
+                        <br />
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
+              );
+            })}
+            <br />
+            <h5>
+              <a href={`/postsolution?hack_id=${body._id}`}>Post Solution</a>
+            </h5>
+          </Col>
         </Row>
       </Container>
     );
-  } else if(body.Type==="Group-targeted"){
+  } else if (body.Type === "Group-targeted") {
     return (
       <Container className={styles.container}>
         <Row className={styles.innerContainer}>
@@ -210,7 +331,9 @@ const Summary = ({ body }) => {
                 {body.Reward}
               </ListGroup.Item>
               <ListGroup.Item style={{ backgroundColor: "var(--dark)" }}>
-                <span style={{ color: "var(--textHighlight)" }}>Target Group: </span>
+                <span style={{ color: "var(--textHighlight)" }}>
+                  Target Group:{" "}
+                </span>
                 {body.TargetGroup}
               </ListGroup.Item>
               <ListGroup.Item style={{ backgroundColor: "var(--dark)" }}>
@@ -234,10 +357,51 @@ const Summary = ({ body }) => {
               </Link>
             </h5>
           </Col>
+          <Col className={styles.col}>
+            <h2 style={{ color: "var(--tertiaryShade)" }}>
+              Phases of the Hackathon:
+            </h2>
+            {phases.map((element, index) => {
+              return (
+                <Accordion defaultActiveKey="0">
+                  <Card
+                    style={{
+                      backgroundColor: "var(--dark)",
+                      // border: "1px ridge var(--white)",
+                      borderBottom: "0",
+                      boxShadow:
+                        "0 15px 15px -3px rgba(0,0,0,.1), 0 15px 15px -2px rgba(0,0,0,.05)",
+                    }}
+                  >
+                    <Accordion.Toggle
+                      as={Card.Header}
+                      eventKey={index}
+                      style={{ color: "var(--textHighlight)" }}
+                    >
+                      Phase {index + 1}:{" "}
+                      <span style={{ color: "var(--white)" }}>
+                        {element.Name}
+                      </span>
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey={index}>
+                      <Card.Body>
+                        {element.Desc}
+                        <br />
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
+              );
+            })}
+            <br />
+            <h5>
+              <a href={`/postsolution?hack_id=${body._id}`}>Post Solution</a>
+            </h5>
+          </Col>
         </Row>
       </Container>
     );
-  } else if(body.Type==="Language-based"){
+  } else if (body.Type === "Language-based") {
     return (
       <Container className={styles.container}>
         <Row className={styles.innerContainer}>
@@ -286,7 +450,9 @@ const Summary = ({ body }) => {
                 {body.Reward}
               </ListGroup.Item>
               <ListGroup.Item style={{ backgroundColor: "var(--dark)" }}>
-                <span style={{ color: "var(--textHighlight)" }}>Chosen Programming Language: </span>
+                <span style={{ color: "var(--textHighlight)" }}>
+                  Chosen Programming Language:{" "}
+                </span>
                 {body.ProgLanguage}
               </ListGroup.Item>
               <ListGroup.Item style={{ backgroundColor: "var(--dark)" }}>
@@ -310,10 +476,51 @@ const Summary = ({ body }) => {
               </Link>
             </h5>
           </Col>
+          <Col className={styles.col}>
+            <h2 style={{ color: "var(--tertiaryShade)" }}>
+              Phases of the Hackathon:
+            </h2>
+            {phases.map((element, index) => {
+              return (
+                <Accordion defaultActiveKey="0">
+                  <Card
+                    style={{
+                      backgroundColor: "var(--dark)",
+                      // border: "1px ridge var(--white)",
+                      borderBottom: "0",
+                      boxShadow:
+                        "0 15px 15px -3px rgba(0,0,0,.1), 0 15px 15px -2px rgba(0,0,0,.05)",
+                    }}
+                  >
+                    <Accordion.Toggle
+                      as={Card.Header}
+                      eventKey={index}
+                      style={{ color: "var(--textHighlight)" }}
+                    >
+                      Phase {index + 1}:{" "}
+                      <span style={{ color: "var(--white)" }}>
+                        {element.Name}
+                      </span>
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey={index}>
+                      <Card.Body>
+                        {element.Desc}
+                        <br />
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
+              );
+            })}
+            <br />
+            <h5>
+              <a href={`/postsolution?hack_id=${body._id}`}>Post Solution</a>
+            </h5>
+          </Col>
         </Row>
       </Container>
     );
-  } else if(body.Type==="Social"){
+  } else if (body.Type === "Social") {
     return (
       <Container className={styles.container}>
         <Row className={styles.innerContainer}>
@@ -362,7 +569,9 @@ const Summary = ({ body }) => {
                 {body.Reward}
               </ListGroup.Item>
               <ListGroup.Item style={{ backgroundColor: "var(--dark)" }}>
-                <span style={{ color: "var(--textHighlight)" }}>Social Cause: </span>
+                <span style={{ color: "var(--textHighlight)" }}>
+                  Social Cause:{" "}
+                </span>
                 {body.Cause}
               </ListGroup.Item>
               <ListGroup.Item style={{ backgroundColor: "var(--dark)" }}>
@@ -386,10 +595,51 @@ const Summary = ({ body }) => {
               </Link>
             </h5>
           </Col>
+          <Col className={styles.col}>
+            <h2 style={{ color: "var(--tertiaryShade)" }}>
+              Phases of the Hackathon:
+            </h2>
+            {phases.map((element, index) => {
+              return (
+                <Accordion defaultActiveKey="0">
+                  <Card
+                    style={{
+                      backgroundColor: "var(--dark)",
+                      // border: "1px ridge var(--white)",
+                      borderBottom: "0",
+                      boxShadow:
+                        "0 15px 15px -3px rgba(0,0,0,.1), 0 15px 15px -2px rgba(0,0,0,.05)",
+                    }}
+                  >
+                    <Accordion.Toggle
+                      as={Card.Header}
+                      eventKey={index}
+                      style={{ color: "var(--textHighlight)" }}
+                    >
+                      Phase {index + 1}:{" "}
+                      <span style={{ color: "var(--white)" }}>
+                        {element.Name}
+                      </span>
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey={index}>
+                      <Card.Body>
+                        {element.Desc}
+                        <br />
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
+              );
+            })}
+            <br />
+            <h5>
+              <a href={`/postsolution?hack_id=${body._id}`}>Post Solution</a>
+            </h5>
+          </Col>
         </Row>
       </Container>
     );
-  } else if(body.Type==="Recruitment"){
+  } else if (body.Type === "Recruitment") {
     return (
       <Container className={styles.container}>
         <Row className={styles.innerContainer}>
@@ -460,6 +710,47 @@ const Summary = ({ body }) => {
               >
                 <a>See Problem Statement</a>
               </Link>
+            </h5>
+          </Col>
+          <Col className={styles.col}>
+            <h2 style={{ color: "var(--tertiaryShade)" }}>
+              Phases of the Hackathon:
+            </h2>
+            {phases.map((element, index) => {
+              return (
+                <Accordion defaultActiveKey="0">
+                  <Card
+                    style={{
+                      backgroundColor: "var(--dark)",
+                      // border: "1px ridge var(--white)",
+                      borderBottom: "0",
+                      boxShadow:
+                        "0 15px 15px -3px rgba(0,0,0,.1), 0 15px 15px -2px rgba(0,0,0,.05)",
+                    }}
+                  >
+                    <Accordion.Toggle
+                      as={Card.Header}
+                      eventKey={index}
+                      style={{ color: "var(--textHighlight)" }}
+                    >
+                      Phase {index + 1}:{" "}
+                      <span style={{ color: "var(--white)" }}>
+                        {element.Name}
+                      </span>
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey={index}>
+                      <Card.Body>
+                        {element.Desc}
+                        <br />
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
+              );
+            })}
+            <br />
+            <h5>
+              <a href={`/postsolution?hack_id=${body._id}`}>Post Solution</a>
             </h5>
           </Col>
         </Row>

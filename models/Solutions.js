@@ -1,23 +1,18 @@
-// const mongoose = require("mongoose");
-// const Schema = require("mongoose.Schema");
-// require("../models/Hackathons");
-// require("../models/Startups");
+const mongoose = require("mongoose");
 
-// var SolutionsSchema = Schema({
-//   Startup: {
-//     type: Schema.Types.ObjectId,
-//     ref: "Startups",
-//   },
-//   Problem: {
-//     type: Schema.Types.ObjectId,
-//     ref: "Hackathons",
-//   },
-//   SolutionLink: {
-//     type: String,
-//   },
-//   SolutionAttach:{
-//       type: String,
-//   }
-// });
+const SolutionsSchema = new mongoose.Schema({
+  HackathonId:{
+      type:String,
+  },
+  StartupId:{
+      type:String,
+  },
+  StartupName:{
+    type:String,
+  },
+  Link: {
+    type: String,
+  },
+});
 
-// mongoose.model("Solutions", SolutionsSchema)
+mongoose.model("Solutions", SolutionsSchema);

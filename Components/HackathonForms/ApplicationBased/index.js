@@ -27,14 +27,6 @@ const ApplicationBased = ({ client_id }) => {
   const [application, setApplication] = useState("");
   const [phases, setPhases] = useState("");
 
-  var phase1 = { phase1: "", desc1: "" };
-  var phase2 = { phase2: "", desc2: "" };
-  var phase3 = { phase3: "", desc3: "" };
-  var phase4 = { phase4: "", desc4: "" };
-  var phase5 = { phase5: "", desc5: "" };
-  var phase6 = { phase6: "", desc6: "" };
-  var count = [1, 2, 3, 4, 5, 6];
-
   console.log(file);
   return (
     <div className={styles.container}>
@@ -142,10 +134,10 @@ const ApplicationBased = ({ client_id }) => {
                   />
                 </Form.Group>
                 <p>Number of Phases:</p>
-                <Form.Group controlId="time" className={styles.formGroup}>
+                <Form.Group controlId="phases" className={styles.formGroup}>
                   <Form.Control
                     maxLength={30}
-                    aria-label="CliPass"
+                    aria-label="phases"
                     className={styles.control}
                     type="number"
                     required={true}
@@ -154,105 +146,13 @@ const ApplicationBased = ({ client_id }) => {
                     onChange={(event) => {
                       event.preventDefault();
                       setPhases(event.target.value);
-                      if (event.target.value === 1) {
-                        return (
-                          <>
-                            <p>Phase 1 Name:</p>
-                            <Form.Group
-                              controlId="phase1"
-                              className={styles.formGroup}
-                            >
-                              <Form.Control
-                                maxLength={30}
-                                aria-label="CliPass"
-                                className={styles.control}
-                                type="text"
-                                required={true}
-                                height="300px"
-                                value={phase1.name}
-                                onChange={(event) => {
-                                  event.preventDefault();
-                                  phase1.name = event.target.value;
-                                }}
-                              />
-                            </Form.Group>
-                            <p>Phase 1 Description:</p>
-                            <Form.Group
-                              controlId="time"
-                              className={styles.formGroup}
-                            >
-                              <Form.Control
-                                maxLength={30}
-                                aria-label="CliPass"
-                                className={styles.control}
-                                type="text"
-                                required={true}
-                                height="300px"
-                                value={phase1.desc1}
-                                onChange={(event) => {
-                                  event.preventDefault();
-                                  phase1.desc1 = event.target.value;
-                                  console.log("phase 1:", phase1);
-                                }}
-                              />
-                            </Form.Group>
-                          </>
-                        );
-                      }
                     }}
                   />
                 </Form.Group>
-                {count.map((element, index) => {
-                  if (phases === 1) {
-                    return (
-                      <>
-                        <p>Phase 1 Name:</p>
-                        <Form.Group
-                          controlId="time"
-                          className={styles.formGroup}
-                        >
-                          <Form.Control
-                            maxLength={30}
-                            aria-label="CliPass"
-                            className={styles.control}
-                            type="text"
-                            required={true}
-                            height="300px"
-                            value={phase1.name}
-                            onChange={(event) => {
-                              event.preventDefault();
-                              phase1.name = event.target.value;
-                            }}
-                          />
-                        </Form.Group>
-                        <p>Phase 1 Description:</p>
-                        <Form.Group
-                          controlId="time"
-                          className={styles.formGroup}
-                        >
-                          <Form.Control
-                            maxLength={30}
-                            aria-label="CliPass"
-                            className={styles.control}
-                            type="text"
-                            required={true}
-                            height="300px"
-                            value={phase1.desc1}
-                            onChange={(event) => {
-                              event.preventDefault();
-                              phase1.desc1 = event.target.value;
-                              console.log("phase 1:", phase1);
-                            }}
-                          />
-                        </Form.Group>
-                      </>
-                    );
-                  }
-                })}
                 <p>Problem Statement:</p>
                 <Form.Group controlId="ProbState" className={styles.formGroup}>
                   <Form.Control
-                    maxLength={1000}
+                    maxLength={10000}
                     aria-label="CliPass"
                     className={styles.control}
                     as="textarea"
@@ -353,7 +253,7 @@ const ApplicationBased = ({ client_id }) => {
                         const { name, _id } = payload;
                         const id = payload.id;
                         const formData = new FormData();
-                        console.log(formData);
+                        console.log('formData:', formData);
                         formData.append("file", file);
                         fetch(`/api/upload?id=${payload.id}`, {
                           method: "POST",
@@ -365,10 +265,12 @@ const ApplicationBased = ({ client_id }) => {
                           body: formData,
                         })
                           .then((res) => {
+                            console.log('Chain response received')
                             return res.json();
                           })
                           .then((response) => {
-                            Router.push(`/probpage?id=${id}`);
+                            console.log('response2 resolved:', response)
+                            Router.push(`/setphases?id=${id}&phases=${phases}`);
                           })
                           .catch((e) => {
                             console.log("error while calling /upload", e);
@@ -378,6 +280,7 @@ const ApplicationBased = ({ client_id }) => {
                       .catch((e) => {
                         console.log(e);
                       });
+                      // Router.push(`/setphases?id=${id}&phases=${phases}`);
                   }}
                 >
                   Post Problem

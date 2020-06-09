@@ -29,7 +29,7 @@ const ClientDashboard = ({ info }) => {
   const today = new Date();
   console.log(today);
   console.log(info);
-  const { data } = info;
+  const { data, role } = info;
   console.log("data", data);
   const [set, toggleSet] = useState("");
   return (
@@ -86,7 +86,7 @@ const ClientDashboard = ({ info }) => {
                     className={styles.seeMore}
                     href={`/probpage?id=${element._id}`}
                     onClick={() =>{
-                      Router.push(`/probpage?id=${element._id}`);
+                      Router.push(`/probpage?id=${element._id}&role=${role}`);
                     }}
                   >
                     See More

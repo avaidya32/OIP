@@ -8,6 +8,19 @@
     color: var(--white);
     font-size: 30px;
 }   
+.img{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
+    width:auto;
+}
+.imgContainer{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .subHeader {
     color: var(--white);
     font-size: 20px;

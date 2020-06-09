@@ -16,6 +16,7 @@ require("../models/VCs");
 require("../models/GoogleUsers");
 require("../models/GithubUsers");
 require("../models/AlternateUsers");
+require("../models/Solutions");
 
 // require("../models/Solutions");
 

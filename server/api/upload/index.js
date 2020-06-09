@@ -9,6 +9,7 @@ const path = require("path");
 const crypto = require("crypto");
 // const methodOverride = require("method-override");
 const keys = require("../../../config/keys");
+const mime = require("node-mime");
 
 let gfs;
 let gfs1;
@@ -48,7 +49,10 @@ const upload = multer({ storage });
 
 routes.post("/", upload.single("file"), (req, res) => {
   console.log(req.query.id);
-  res.redirect(`/probpage?id=${req.query.id}`);
+  return res.status(200).json({
+    status:'posted data'
+  });
+  // res.redirect(`/probpage?id=${req.query.id}`);
 });
 
 routes.get("/image", (req, res) => {
@@ -58,6 +62,9 @@ routes.get("/image", (req, res) => {
     if (!file || file.length === 0) {
       return res.status(404).json({ err: "No file exists" });
     }
+    //var mimetype = mime.lookup(file.filename);
+    res.set('Content-Type', file.contentType);
+    res.set('Content-Disposition', 'attachment; filename="' + file.filename + '"');
     const readStream = gfs.createReadStream(file.filename);
     readStream.pipe(res);
   });

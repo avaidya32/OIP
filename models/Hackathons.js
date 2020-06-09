@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const HackathonsSchema = new mongoose.Schema({
     ClientId:{
         type:String,
-        required:[true],
+        required:[false],
         unique:false,
         trim:true
     },

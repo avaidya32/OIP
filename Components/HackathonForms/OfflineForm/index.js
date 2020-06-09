@@ -185,7 +185,8 @@ const OfflineForm = ({ client_id }) => {
                             return res.json();
                           })
                           .then((response) => {
-                            //Router.push(`/probPage?id=${id}`);
+                            console.log('response2 resolved:', response)
+                            Router.push(`/probPage?id=${id}`);
                           })
                           .catch((e) => {
                             console.log("error while calling /upload", e);

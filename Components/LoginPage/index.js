@@ -10,7 +10,7 @@ import GoogleButton from "react-google-button";
 import Router from "next/router";
 import { GithubLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
-import {ParallaxProvider} from "react-scroll-parallax";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 const LoginPage = () => {
   const [page, togglePage] = useState("Client");
@@ -20,12 +20,11 @@ const LoginPage = () => {
       link = "/api/auth/client-local";
       break;
     case "Startup":
-      link="/api/auth/startup-local";
+      link = "/api/auth/startup-local";
       break;
-    // case "Student":
-    //   header = "Kickstart your ";
-    //   colouredText = "Career";
-    //   break;
+    case "Student":
+      link = "/api/auth/student-local";
+      break;
     // case "VC":
     //   header = "Invest in the ";
     //   colouredText = "Future";
@@ -38,126 +37,145 @@ const LoginPage = () => {
 
   return (
     <ParallaxProvider>
-    <div className={styles.container}>
-      <Container className={styles.innerContainer}>
-        <Row>
-          {/* <Col className={styles.col} style={{ paddingLeft: 0 }}>
+      <div className={styles.container}>
+        <Container className={styles.innerContainer}>
+          <Row>
+            {/* <Col className={styles.col} style={{ paddingLeft: 0 }}>
             <h2>
               Login to start{" "}
               <span style={{ color: "var(--textHighlight)" }}>Innovating</span>
             </h2>
           </Col> */}
-          <Col className={styles.col}>
-            <h5>
-              <a
-                className={
-                  page === "Client" ? styles.highlight : styles.noHighlight
-                }
-                onClick={() => {
-                  togglePage("Client");
-                }}
-              >
-                Client{" "}
-              </a>
-              <a
-                className={
-                  page === "Startup" ? styles.highlight : styles.noHighlight
-                }
-                onClick={() => {
-                  togglePage("Startup");
-                }}
-              >
-                Startup{" "}
-              </a>
-              <a
-                className={
-                  page === "Student" ? styles.highlight : styles.noHighlight
-                }
-                onClick={() => {
-                  togglePage("Student");
-                }}
-              >
-                Student{" "}
-              </a>
-              <a
-                className={
-                  page === "VC" ? styles.highlight : styles.noHighlight
-                }
-                onClick={() => {
-                  togglePage("VC");
-                }}
-              >
-                VC{" "}
-              </a>
-              <a
-                className={
-                  page === "University" ? styles.highlight : styles.noHighlight
-                }
-                onClick={() => {
-                  togglePage("University");
-                }}
-              >
-                University{" "}
-              </a>
-            </h5>
-          </Col>
-          <Col className={styles.col}>
-            <div className={styles.formContainer}>
-              <Form action={link}>
-                <p>Username:</p>
-                <Form.Group controlId="username" className={styles.formGroup}>
-                  <Form.Control
-                    maxLength={30}
-                    aria-label="name-edit"
-                    className={styles.control}
-                    type="text"
-                    required={true}
-                    name="username"
-                  />
-                </Form.Group>
-                <p>Password:</p>
-                <Form.Group controlId="password" className={styles.formGroup}>
-                  <Form.Control
-                    maxLength={30}
-                    aria-label="name-edit"
-                    className={styles.control}
-                    type="password"
-                    required={true}
-                    name="password"
-                  />
-                </Form.Group>
-                <Button
-                  variant="cta"
-                  size="lg"
-                  //href="/api/auth/client-local"
-                  type="submit"
+            <Col className={styles.col}>
+              <h5>
+                <a
+                  className={
+                    page === "Client" ? styles.highlight : styles.noHighlight
+                  }
+                  onClick={() => {
+                    togglePage("Client");
+                  }}
                 >
-                  Login
-                </Button>
-              </Form>
-              <GoogleLoginButton
-                onClick={(e) => {
-                  if (page === "Client") {
-                    Router.push("/api/auth/google-client");
-                  } else if (page === "Startup") {
-                    Router.push("/api/auth/google-startup");
+                  Client{" "}
+                </a>
+                <a
+                  className={
+                    page === "Startup" ? styles.highlight : styles.noHighlight
                   }
-                }}
-              />
-              <GithubLoginButton
-                onClick={(e) => {
-                  if (page === "Client") {
-                    Router.push("/api/auth/github-client");
-                  } else if (page === "Startup") {
-                    Router.push("/api/auth//github-startup");
+                  onClick={() => {
+                    togglePage("Startup");
+                  }}
+                >
+                  Startup{" "}
+                </a>
+                <a
+                  className={
+                    page === "Student" ? styles.highlight : styles.noHighlight
                   }
-                }}
-              />
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+                  onClick={() => {
+                    togglePage("Student");
+                  }}
+                >
+                  Student{" "}
+                </a>
+                <a
+                  className={
+                    page === "VC" ? styles.highlight : styles.noHighlight
+                  }
+                  onClick={() => {
+                    togglePage("VC");
+                  }}
+                >
+                  VC{" "}
+                </a>
+                <a
+                  className={
+                    page === "University"
+                      ? styles.highlight
+                      : styles.noHighlight
+                  }
+                  onClick={() => {
+                    togglePage("University");
+                  }}
+                >
+                  University{" "}
+                </a>
+              </h5>
+            </Col>
+            <Col className={styles.col}>
+              <div className={styles.formContainer}>
+                <Form action={link}>
+                  <p>Username:</p>
+                  <Form.Group controlId="username" className={styles.formGroup}>
+                    <Form.Control
+                      maxLength={30}
+                      aria-label="name-edit"
+                      className={styles.control}
+                      type="text"
+                      required={true}
+                      name="username"
+                    />
+                  </Form.Group>
+                  <p>Password:</p>
+                  <Form.Group controlId="password" className={styles.formGroup}>
+                    <Form.Control
+                      maxLength={30}
+                      aria-label="name-edit"
+                      className={styles.control}
+                      type="password"
+                      required={true}
+                      name="password"
+                    />
+                  </Form.Group>
+                  <Button
+                    variant="cta"
+                    size="lg"
+                    //href="/api/auth/client-local"
+                    type="submit"
+                  >
+                    Login
+                  </Button>
+                </Form>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    //color:"var(--tertiaryShade)",
+                    marginTop:"5px"
+                  }}
+                >
+                  <b><h3 style={{ alignItems: "center" }}> OR </h3></b>
+                </div>
+                <br />
+                <GoogleLoginButton
+                  onClick={(e) => {
+                    if (page === "Client") {
+                      Router.push("/api/auth/google-client");
+                    } else if (page === "Startup") {
+                      Router.push("/api/auth/google-startup");
+                    } else if (page === "Student") {
+                      Router.push("/api/auth/google-student");
+                    }
+                  }}
+                />
+                <GithubLoginButton
+                  onClick={(e) => {
+                    if (page === "Client") {
+                      Router.push("/api/auth/github-client");
+                    } else if (page === "Startup") {
+                      Router.push("/api/auth//github-startup");
+                    } else if (page === "Student") {
+                      Router.push("/api/auth/github-student");
+                    }
+                  }}
+                />
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </ParallaxProvider>
   );
 };

@@ -11,7 +11,7 @@ const Additional = ({ user }) => {
   );
 };
 
-Additional.getInitialProps = async ({ query, res, req }) => {
+Additional.getInitialProps = async ({req, res }) => {
   console.log("getprops:", req.user);
   return { user: req.user };
 };

@@ -2,9 +2,8 @@ const routes = require("express").Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
 const passportSetup = require("../../../utils/passport-setup");
-const AlternateUsers = mongoose.model("AlternateUsers");
-const opn = require("opn");
-const logout = require("express-passport-logout");
+
+
 
 routes.get(
   "/client-local",
@@ -117,6 +116,59 @@ routes.get(
 
     res.redirect("/startupHome");
   }
+);
+/////////////////////////////////////////////////////////////                     Student 
+routes.get(
+  "/github-student",
+  passport.authenticate("github-student", { scope: ["user"] })
+);
+
+routes.get(
+  "/github/redirect/student",
+  passport.authenticate("github-student"),
+  (req, res) => {
+    console.log("here:", req.user);
+    console.log("in callback");
+
+    if (req.user.Role === "Student" && req.user.Year) {
+      res.redirect("/studentHome");
+    } else {
+      res.redirect("/additionalInfo");
+    }
+  }
+);
+
+
+routes.get(
+  "/google-student",
+  passport.authenticate("google-student", {
+    scope: ["profile"],
+  })
+);
+
+routes.get(
+  "/google/redirect-student",
+  passport.authenticate("google-student"),
+  (req, res) => {
+    //res.send('here:'+req.user);
+    console.log("in callback", req.user);
+    // res.redirect('/additionalInfo');
+    req.session.user = req.user;
+    if (req.user.Role === "Student" && req.user.Year) {
+      res.redirect("/studentHome");
+    } else {
+      res.redirect("/additionalInfo");
+    }
+  }
+);
+
+
+routes.get(
+  "/student-local",
+  passport.authenticate("student-local", {
+    successRedirect: "/studentHome",
+    failureRedirect: "/",
+  })
 );
 
 module.exports = routes;

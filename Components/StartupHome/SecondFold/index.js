@@ -55,7 +55,7 @@ const SecondFold = ({ body }) => {
               return (
                 <Col md="3" className={styles.cardContainer} key={index}>
                   <Card className={styles.card}>
-                    <Card.Img variant="top" src="globe.jpg" />
+                    <Card.Img variant="top" src={`/api/upload/image?name=file_${element._id}` || "https://via.placeholder.com/400x350"}  />
                     <Card.Body>
                       <Card.Title><b>{element.ProblemName}</b></Card.Title>
                       <Card.Text style={{ marginBottom: "8px" }}>

@@ -42,7 +42,7 @@ const SecondFold = () => {
                   to="login"
                   spy={true}
                   smooth={true}
-                  offset={0}
+                  offset={-60}
                   activeClass="active"
                 >
                   <Button

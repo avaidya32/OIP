@@ -122,10 +122,10 @@ const AdditionalInfo = ({ user }) => {
               size="lg"
               onClick={(e) => {
                 e.preventDefault();
-                fetch("/api/register/student", {
+                fetch("/api/update/student", {
                   method: "POST",
                   body: JSON.stringify({
-                    GoogleID: GoogleId,
+                    id: id,
                     Name: name,
                     Email: email,
                     University: university,
@@ -148,7 +148,7 @@ const AdditionalInfo = ({ user }) => {
                       payload,
                       payload.data
                     );
-                    // Router.push(`/studentHome`);
+                    Router.push(`/studentHome`);
                   })
                   .catch((e) => {
                     console.log(e);
@@ -314,7 +314,7 @@ const AdditionalInfo = ({ user }) => {
                 })
                 .then((payload) => {
                   console.log("from register client:", payload);
-                  //Router.push(`/login`);
+                  Router.push(`/clientHome?id=${payload._id}&role=Client`);
                 })
                 .catch((e) => {
                   console.log(e);
@@ -526,7 +526,7 @@ const AdditionalInfo = ({ user }) => {
                 })
                 .then((payload) => {
                   console.log("from register client:", payload, payload.data);
-                  //Router.push(`/login`);
+                  Router.push(`/startupHome?id=${payload._id}`);
                 })
                 .catch((e) => {
                   console.log(e);

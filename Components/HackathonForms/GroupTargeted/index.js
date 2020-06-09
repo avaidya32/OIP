@@ -17,6 +17,7 @@ const GroupTargeted = ({ client_id }) => {
   const [link, setLink] = useState("");
   const [file, setFile] = useState();
   const [group, setGroup] = useState("");
+  const [phases, setPhases] = useState("");
   console.log(file);
   return (
     <div className={styles.container}>
@@ -60,7 +61,10 @@ const GroupTargeted = ({ client_id }) => {
                   />
                 </Form.Group>
                 <p>Target Group:</p>
-                <Form.Group controlId="Application" className={styles.formGroup}>
+                <Form.Group
+                  controlId="Application"
+                  className={styles.formGroup}
+                >
                   <Form.Control
                     maxLength={50}
                     aria-label="name-edit"
@@ -120,10 +124,26 @@ const GroupTargeted = ({ client_id }) => {
                     }}
                   />
                 </Form.Group>
+                <p>Number of Phases:</p>
+                <Form.Group controlId="phases" className={styles.formGroup}>
+                  <Form.Control
+                    maxLength={30}
+                    aria-label="phases"
+                    className={styles.control}
+                    type="number"
+                    required={true}
+                    height="300px"
+                    value={phases}
+                    onChange={(event) => {
+                      event.preventDefault();
+                      setPhases(event.target.value);
+                    }}
+                  />
+                </Form.Group>
                 <p>Problem Statement:</p>
                 <Form.Group controlId="ProbState" className={styles.formGroup}>
                   <Form.Control
-                    maxLength={1000}
+                    maxLength={10000}
                     aria-label="CliPass"
                     className={styles.control}
                     as="textarea"
@@ -212,9 +232,9 @@ const GroupTargeted = ({ client_id }) => {
                         Statement: statement,
                         Reward: reward,
                         Link: link,
-                        TargetGroup:group,
-                        Type:"Group-targeted",
-                      }), 
+                        TargetGroup: group,
+                        Type: "Group-targeted",
+                      }),
                       headers: {
                         "Content-type": "application/json; charset=UTF-8",
                       },
@@ -224,7 +244,7 @@ const GroupTargeted = ({ client_id }) => {
                       })
                       .then((payload) => {
                         const { name, _id } = payload;
-                        const id=payload.id;
+                        const id = payload.id;
                         const formData = new FormData();
                         console.log(formData);
                         formData.append("file", file);
@@ -242,13 +262,13 @@ const GroupTargeted = ({ client_id }) => {
                             Router.push(`/probpage?id=${id}`);
                           })
                           .then((response) => {
-                            Router.push(`/probpage?id=${id}`);
+                            Router.push(`/setphases?id=${id}&phases=${phases}`);
                           })
                           .catch((e) => {
                             console.log("error while calling /upload", e);
                             //TODO:
                           });
-                        Router.push(`/probPage?id=${id}`);
+                        Router.push(`/setphases?id=${id}&phases=${phases}`);
                       })
                       .catch((e) => {
                         console.log(e);

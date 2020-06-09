@@ -7,21 +7,22 @@ import Layout from "../Components/Common/Layout";
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
-const Prob = ({ data }) => {
+const Prob = ({ info }) => {
   return (
     <Layout>
-      <ProbPage dataObject={data} />
+      <ProbPage dataObject={info} />
     </Layout>
   );
 };
 
 Prob.getInitialProps = async ({ query, res, req }) => {
-  if (!req.user) {
-    res.redirect("/login");
-  } else if (req.user.Role != "Client" && req.user.Role === "Startup") {
+  // if (!req.user) {
+  //   res.redirect("/login");
+  // }
+  const { id, role } = query;
+  if (role != "Client" && role === "Startup") {
     res.redirect("/startupHome");
   }
-  const { id } = query;
   console.log("getprops probpage id", id);
   const data = await fetch("http://localhost:3000/api/hackathon/getinfo", {
     method: "POST",
@@ -38,8 +39,24 @@ Prob.getInitialProps = async ({ query, res, req }) => {
     .then((payload) => {
       return payload;
     });
-  console.log(data);
-  return { data };
+  const data2 = await fetch("http://localhost:3000/api/solution/getinfo", {
+    method: "POST",
+    body: JSON.stringify({
+      id: id,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((payload) => {
+      return payload;
+    });
+  console.log('data2 getprops',data2);
+  const info = { data: data, data2: data2 };
+  return { info };
 };
 
 export default Prob;

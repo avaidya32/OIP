@@ -16,6 +16,7 @@ ClientHomePage.getInitialProps = async ({ query, res, req }) => {
     res.redirect("/startupHome");
   }
   const id = req.user._id;
+  const role = req.user.Role;
   const data = await fetch("http://localhost:3000/api/dashboard/client", {
     method: "POST",
     body: JSON.stringify({
@@ -32,7 +33,7 @@ ClientHomePage.getInitialProps = async ({ query, res, req }) => {
       return payload;
     });
   console.log("data: ", data);
-  const info = { data };
+  const info = { data: data, role: role };
   console.log("info:", info);
   return { info };
 };

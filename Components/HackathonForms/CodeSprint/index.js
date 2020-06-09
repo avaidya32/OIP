@@ -17,6 +17,7 @@ const CodeSprint = ({ client_id }) => {
   const [link, setLink] = useState("");
   const [file, setFile] = useState();
   const [application, setApplication] = useState("");
+  const [phases, setPhases] = useState("");
   console.log(file);
   return (
     <div className={styles.container}>
@@ -105,10 +106,26 @@ const CodeSprint = ({ client_id }) => {
                     }}
                   />
                 </Form.Group>
+                <p>Number of Phases:</p>
+                <Form.Group controlId="phases" className={styles.formGroup}>
+                  <Form.Control
+                    maxLength={30}
+                    aria-label="phases"
+                    className={styles.control}
+                    type="number"
+                    required={true}
+                    height="300px"
+                    value={phases}
+                    onChange={(event) => {
+                      event.preventDefault();
+                      setPhases(event.target.value);
+                    }}
+                  />
+                </Form.Group>
                 <p>Software Summary: </p>
                 <Form.Group controlId="ProbState" className={styles.formGroup}>
                   <Form.Control
-                    maxLength={1000}
+                    maxLength={10000}
                     aria-label="CliPass"
                     className={styles.control}
                     as="textarea"
@@ -197,8 +214,8 @@ const CodeSprint = ({ client_id }) => {
                         Statement: statement,
                         Reward: reward,
                         Link: link,
-                        Type:"Code-sprint",
-                      }), 
+                        Type: "Code-sprint",
+                      }),
                       headers: {
                         "Content-type": "application/json; charset=UTF-8",
                       },
@@ -208,7 +225,7 @@ const CodeSprint = ({ client_id }) => {
                       })
                       .then((payload) => {
                         const { name, _id } = payload;
-                        const id=payload.id;
+                        const id = payload.id;
                         const formData = new FormData();
                         console.log(formData);
                         formData.append("file", file);
@@ -225,7 +242,7 @@ const CodeSprint = ({ client_id }) => {
                             return res.json();
                           })
                           .then((response) => {
-                            Router.push(`/probpage?id=${id}`);
+                            Router.push(`/setphases?id=${id}&phases=${phases}`);
                           })
                           .catch((e) => {
                             console.log("error while calling /upload", e);

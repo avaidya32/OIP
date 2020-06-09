@@ -8,6 +8,8 @@ require("../models/Clients");
 const Clients = mongoose.model("Clients");
 require("../models/Startups");
 const Startups = mongoose.model("Startups");
+require("../models/Students");
+const Students = mongoose.model("Students");
 
 passport.serializeUser((user, done) => {
   var key = {
@@ -21,7 +23,12 @@ passport.deserializeUser((key, done) => {
   // GoogleUsers.findById(id).then((user) => {
   //   done(null, user.id);
   // });
-  var Model = key.type === "Client" ? Clients : Startups;
+  var Model =
+    key.type === "Client"
+      ? Clients
+      : key.type === "Startup"
+      ? Startups
+      : Students;
   Model.findById(key.id).then((user) => {
     done(null, user);
   });
@@ -155,7 +162,7 @@ passport.use(
           new Clients({
             EmailID: profile.email,
             GithubID: profile.id,
-            Role:"Client"
+            Role: "Client",
           })
             .save()
             .then((newUser) => {
@@ -187,7 +194,7 @@ passport.use(
           new Startups({
             EmailID: profile.email,
             GithubID: profile.id,
-            Role:"Startup"
+            Role: "Startup",
           })
             .save()
             .then((newUser) => {
@@ -198,4 +205,90 @@ passport.use(
       });
     }
   )
+);
+////////////////////////////////////////                                   Student
+passport.use(
+  "github-student",
+  new GithubStrategy(
+    {
+      clientID: keys.GITHUB_CLIENT_ID,
+      clientSecret: keys.GITHUB_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/api/auth/github/redirect/student",
+    },
+    function (accessToken, refreshToken, profile, done) {
+      Students.findOne({ GithubID: profile.id }).then((currentUser) => {
+        if (currentUser) {
+          //user exists
+          console.log("user is", currentUser);
+          done(null, currentUser);
+        } else {
+          //create new user
+          new Students({
+            EmailID: profile.email,
+            GithubID: profile.id,
+            Role: "Student",
+          })
+            .save()
+            .then((newUser) => {
+              console.log("new user created", newUser);
+              done(null, newUser);
+            });
+        }
+      });
+    }
+  )
+);
+
+passport.use(
+  "google-student",
+  new GoogleStrategy(
+    {
+      //options for strategy
+      callbackURL: "/api/auth/google/redirect-student",
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+    },
+    (accessToken, refreshToken, profile, done) => {
+      console.log(profile);
+      console.log("passport cb fired");
+      //check if user exists
+      Students.findOne({ GoogleID: profile.id }).then((currentUser) => {
+        if (currentUser) {
+          //user exists
+          console.log("user is", currentUser);
+          done(null, currentUser);
+        } else {
+          //create new user
+          new Students({
+            Name: profile.displayName,
+            GoogleID: profile.id,
+            Role: "Student",
+          })
+            .save()
+            .then((newUser) => {
+              console.log("new user created", newUser);
+              done(null, newUser);
+            });
+        }
+      });
+    }
+  )
+);
+
+passport.use(
+  "student-local",
+  new LocalStrategy(function (username, password, done) {
+    Students.findOne({ username: username }, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: "Incorrect username." });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: "Incorrect password." });
+      }
+      return done(null, user);
+    });
+  })
 );
